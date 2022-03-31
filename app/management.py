@@ -1,9 +1,11 @@
 from flask import request
-import json
 from spartan import Spartan
 from pymongo import MongoClient
 
-client = MongoClient()
+with open("database.config") as config_file:
+    database_url = config_file.read().strip()
+
+client = MongoClient(database_url)
 
 db = client.spartans
 
@@ -69,11 +71,11 @@ def read_spartan_from_json():
         return None
 
 
-# def add_to_db():
-#     spartan = read_spartan_from_json()
-#
-#     record = db.clients_data.insert_one(vars(spartan))
-#     return f"Entry saved{record}."
+def add_to_db():
+    spartan = read_spartan_from_json()
+
+    record = db.clients_data.insert_one(vars(spartan))
+    return f"Entry saved{record}."
 
 
 def check_id_in_db(id_to_check):
