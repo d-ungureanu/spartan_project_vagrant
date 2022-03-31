@@ -6,6 +6,7 @@ with open("database.config") as config_file:
     database_url = config_file.read().strip()
 
 client = MongoClient(database_url)
+# client = MongoClient()
 
 db = client.spartans
 
@@ -73,9 +74,11 @@ def read_spartan_from_json():
 
 def add_to_db():
     spartan = read_spartan_from_json()
-
-    record = db.clients_data.insert_one(vars(spartan))
-    return f"Entry saved{record}."
+    if spartan is str:
+        return spartan
+    else:
+        record = db.clients_data.insert_one(dir(spartan))
+        return f"Entry saved{record}."
 
 
 def check_id_in_db(id_to_check):
