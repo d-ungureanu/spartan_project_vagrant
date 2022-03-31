@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def homepage():
-    homepage_content = """HOMEPAGE for Vagrant Docker version
+    homepage_content = """HomE for Vagrant Docker version
     
     
 1-  method: GET, route: / This is the landing page (Home page). 
@@ -51,7 +51,7 @@ def remove_spartan():
 @app.route("/spartan", methods=["GET"])
 def list_spartans():
     spartans_db = management.display_db()
-    return spartans_db
+    return f"{spartans_db}"
 
 
 if __name__ == '__main__':
