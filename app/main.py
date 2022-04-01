@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def homepage():
-    homepage_content = """homePAGE for Vagrant Docker version
+    homepage_content = """Homepage for AWS + Docker version
     
     
 1-  method: GET, route: / This is the landing page (Home page). 
