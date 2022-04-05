@@ -1,14 +1,19 @@
+import time
+
 from flask import request
 from spartan import Spartan
 from pymongo import MongoClient
 
-
-client = MongoClient("mongodb://db.dungureanu.devops106:27017")
+while True:
+    try:
+        client = MongoClient("mongodb://db.dungureanu.devops106:27017")
+        break
+    except Exception as ex:
+        print(ex)
+        print("Trying to connect to the database.")
+        time.sleep(2)
 
 db = client.spartans
-
-all_spartans_db = {}
-spartans_counter = 0
 
 
 def spartan_info(spartan_id_to_display):
@@ -108,4 +113,3 @@ def display_db():
 #         return f"Deleted entry with ID: {id_to_delete}"
 #     else:
 #         return f"ID: {id_to_delete} not in database."
-
