@@ -2,11 +2,8 @@ from flask import request
 from spartan import Spartan
 from pymongo import MongoClient
 
-with open("database.config") as config_file:
-    database_url = config_file.read().strip()
 
-client = MongoClient(database_url)
-# client = MongoClient()
+client = MongoClient("mongodb://db.dungureanu.devops106:27017")
 
 db = client.spartans
 
