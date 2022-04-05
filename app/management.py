@@ -104,12 +104,15 @@ def display_db():
         result += f"{each_entry}\n\n"
     return result
 
-# def delete_from_db(id_to_delete):
-#     global all_spartans_db
-#     # load_db_from_file()
-#     if id_to_delete in all_spartans_db.keys():
-#         del all_spartans_db[id_to_delete]
-#         save_db_as_json()
-#         return f"Deleted entry with ID: {id_to_delete}"
-#     else:
-#         return f"ID: {id_to_delete} not in database."
+
+def delete_from_db(id_to_delete):
+    try:
+        db_response = db.clients_data.delete_one({"sparta_id": id_to_delete})
+        if db_response.deleted_count == 1:
+            return f"User deleted, sparta ID: {id_to_delete}"
+        return f"User not found"
+    except Exception as ex:
+        print("********************")
+        print(ex)
+        print("********************")
+        return f"Sorry can not delete user."
