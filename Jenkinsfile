@@ -27,6 +27,16 @@ pipeline {
       }
     }
 
+    stage('Testing the code') {
+      steps {
+        script {
+          sh '''
+            docker run $IMAGE_NAME pytest
+          '''
+        }
+      }
+    }
+
     stage('Push to Docker Hub'){
       steps {
           script {
