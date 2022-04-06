@@ -7,23 +7,23 @@ app = Flask(__name__)
 @app.route("/", methods=["GET"])
 def homepage():
     homepage_content = """Homepage for AWS + Docker version
-    
-    
-1-  method: GET, route: / This is the landing page (Home page). 
+
+
+1-  method: GET, route: / This is the landing page (Home page).
     It should return a welcome message along with a simple tutorial clarifying how APIs can be used
 
-2-  method: POST, route: /spartan/add 
+2-  method: POST, route: /spartan/add
     This API should allow the user to add new spartan to the system by passing a JSON object.
 
-3-  method: GET, route: /spartan/<spartan_id> 
-    Get certain employee using the spartan_id. 
-    An error message should be returned if the spartan_id doesn't exist in the system. 
+3-  method: GET, route: /spartan/<spartan_id>
+    Get certain employee using the spartan_id.
+    An error message should be returned if the spartan_id doesn't exist in the system.
     The data should be returned as string
 
-4-  method: POST, route: /spartan/remove?id=sparta_id 
+4-  method: POST, route: /spartan/remove?id=sparta_id
     This API should allow the user to remove a spartan from the system by passing the sparta_id in the query_string
 
-5- method: GET, route: /spartan 
+5- method: GET, route: /spartan
 This API should return the spartan list as one JSON object."""
     return homepage_content
 
@@ -54,5 +54,6 @@ def list_spartans():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000, host="0.0.0.0")
+    #app.run(debug=True, port=5000, host="0.0.0.0")
     # app.run(debug=True)
+    pass
