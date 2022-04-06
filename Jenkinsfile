@@ -9,8 +9,14 @@ pipeline {
   stages {
     stage('Cloning the Spartan Project for GitHub'){
       steps {
-        git branch: 'main',
-        url: 'https://github.com/d-ungureanu/spartan_project_vagrant.git'
+        checkout([
+            $class: "GitSCM",
+            branches: [[name: "/main"]],
+            userRemoteConfigs: [[
+                url: "git@github.com:d-ungureanu/spartan_project_vagrant.git",
+                credentialsID: "ssh_git_cred"
+            ]]
+        ])
       }
     }
 
