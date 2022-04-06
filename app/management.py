@@ -104,15 +104,15 @@ def display_db():
         result += f"{each_entry}\n\n"
     return result
 
-# this is not working. error when deleting non-existing id.
-# def delete_from_db(id_to_delete):
-#     try:
-#         db_response = db.clients_data.delete_one({"sparta_id": id_to_delete})
-#         if db_response.deleted_count == 1:
-#             return f"User deleted, sparta ID: {id_to_delete}"
-#         return f"User not found"
-#     except Exception as ex:
-#         print("********************")
-#         print(ex)
-#         print("********************")
-#         return f"Sorry can not delete user."
+#this is not working. error when deleting non-existing id.
+def delete_from_db(id_to_delete):
+    try:
+        db_response = db.clients_data.delete_one({"sparta_id": id_to_delete})
+        if db_response.deleted_count == 1:
+            return f"User deleted, sparta ID: {id_to_delete}"
+        return f"User not found"
+    except Exception as ex:
+        print("********************")
+        print(ex)
+        print("********************")
+        return f"Sorry can not delete user."
