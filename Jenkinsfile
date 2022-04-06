@@ -8,5 +8,13 @@ pipeline {
         url: 'https://github.com/d-ungureanu/spartan_project_vagrant.git'
       }
     }
+
+    stage('Build Docker image') {
+      steps {
+        script {
+          docker.build 'leiungureanu/spartan_project_vagrant:latest'
+        }
+      }
+    }
   }
 }
