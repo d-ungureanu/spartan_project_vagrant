@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  environment {
+    IMAGE_NAME = 'leiungureanu/spartan_project_vagrant:1.' + "$BUILD_NUMBER"
+  }
+
   stages {
     stage('Cloning the Spartan Project for GitHub'){
       steps {
@@ -12,7 +16,7 @@ pipeline {
     stage('Build Docker image') {
       steps {
         script {
-          DOCKER_IMAGE = docker.build 'leiungureanu/spartan_project_vagrant'
+          DOCKER_IMAGE = docker.build IMAGE_NAME
         }
       }
     }
