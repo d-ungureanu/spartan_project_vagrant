@@ -10,11 +10,10 @@ pipeline {
     stage('Cloning the Spartan Project for GitHub'){
       steps {
         checkout([
-            $class: "GitSCM",
-            branches: [[name: "/main"]],
+            $class: "GitSCM", branches: [[name: "/main"]],
             userRemoteConfigs: [[
                 url: "git@github.com:d-ungureanu/spartan_project_vagrant.git",
-                credentialsID: "ssh_git_cred"
+                credentialsId: "ssh_git_cred"
             ]]
         ])
       }
