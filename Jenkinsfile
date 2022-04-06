@@ -11,7 +11,7 @@ pipeline {
       steps {
         checkout([
           $class: 'GitSCM', branches: [[name: '*/main']],
-          serRemoteConfigs: [[
+          userRemoteConfigs: [[
             url: 'git@github.com:d-ungureanu/spartan_project_vagrant.git',
             credentialsId: 'ssh_git_cred'
           ]]
