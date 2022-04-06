@@ -12,8 +12,18 @@ pipeline {
     stage('Build Docker image') {
       steps {
         script {
-          docker.build 'leiungureanu/spartan_project_vagrant:latest'
+          DOCKER_IMAGE = docker.build 'leiungureanu/spartan_project_vagrant'
         }
+      }
+    }
+
+    stage('Push to Docker Hub'){
+      steps {
+          script {
+            docker.withRegistry('', 'docker_hub_cred'){
+              DOCKER_IMAGE.push()
+            }
+          }
       }
     }
   }
