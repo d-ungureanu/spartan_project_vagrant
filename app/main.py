@@ -1,30 +1,19 @@
 from flask import Flask, request
 import management
+from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
+
+by_path_counter = metrics.counter(
+    'by_path_counter', 'Request count by request paths',
+    labels={'path': lambda: request.path}
+)
 
 
 @app.route("/", methods=["GET"])
 def homepage():
-    homepage_content = """Homepage for AWS + Docker version
-
-
-1-  method: GET, route: / This is the landing page (Home page).
-    It should return a welcome message along with a simple tutorial clarifying how APIs can be used
-
-2-  method: POST, route: /spartan/add
-    This API should allow the user to add new spartan to the system by passing a JSON object.
-
-3-  method: GET, route: /spartan/<spartan_id>
-    Get certain employee using the spartan_id.
-    An error message should be returned if the spartan_id doesn't exist in the system.
-    The data should be returned as string
-
-4-  method: POST, route: /spartan/remove?id=sparta_id
-    This API should allow the user to remove a spartan from the system by passing the sparta_id in the query_string
-
-5- method: GET, route: /spartan
-This API should return the spartan list as one JSON object."""
+    homepage_content = f"Homepage for AWS + Docker version from server ID:{management.server_id}"
     return homepage_content
 
 
@@ -41,6 +30,7 @@ def spartan_getter(spartan_id):
 
 
 @app.route("/spartan/remove", methods=["POST"])
+@by_path_counter
 def remove_spartan():
     id_var = int(request.args.get("id"))
     result = management.delete_from_db(id_var)
@@ -48,6 +38,7 @@ def remove_spartan():
 
 
 @app.route("/spartan", methods=["GET"])
+@by_path_counter
 def list_spartans():
     spartans_db = management.display_db()
     return f"{spartans_db}"
